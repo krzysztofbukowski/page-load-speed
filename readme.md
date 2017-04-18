@@ -1,9 +1,10 @@
 # Page load speed benchmark
 
-Usage: node index.js <ADDRESS> <NUM>
+Usage: `node index.js <ADDRESS> <NUM>`<br/>
 Where
-* <ADDRESS> - page address to be tested
-* <NUM> - number of iterations
+
+* `<ADDRESS>` - page address to be tested
+* `<NUM>` - number of iterations
 
 ## Troubleshooting
 
