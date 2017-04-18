@@ -3,7 +3,7 @@ if (process.argv.length === 2) {
     return;
 }
 
-let spawn = require('child_process').spawn,
+let child_process = require('child_process'),
     _ = require('lodash'),
     CMD='./node_modules/.bin/phantomjs',
     ARGS = [],
@@ -20,24 +20,18 @@ ARGS = [
     process.argv[2]
 ]
 
-console.log('Benchmark started...');
-
-for (var i = 0; i < maxCount; i++) {
-    var child = spawn(
+for (let i = 0; i < maxCount; i++) {
+    var child = child_process.spawnSync(
         CMD,
         ARGS
     );
+    let time = parseInt(`${child.stdout}`);
+    console.log('Load time', time + 'ms');
 
-    child.stdout.on('data', (data) => {
-        let time = parseInt(`${data}`);
-        console.log('Load time', time + 'ms');
-
-        loadTimes.push(time);
-        if (++counter >= maxCount) {
-            onLoadFinished();
-        }
-    })
+    loadTimes.push(time)
 }
+
+onLoadFinished();
 
 function onLoadFinished() {
     maxTime = _.max(loadTimes);
